@@ -1,21 +1,21 @@
-// Define the URL
+// Define the URL of the Indian Railway API
 const apiUrl = "https://indian-railway-api.cyclic.app/trains/betweenStations/?from=NGP&to=MTY";
 
-// Use the fetch API to make a GET request
-fetch(apiUrl)
+// Define the URL of the proxy server (cors-anywhere)
+const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+
+// Use the fetch API to make a GET request through the proxy
+fetch(proxyUrl + apiUrl)
   .then(response => {
-    // Check if the response status is OK (200)
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    // Parse the JSON response
     return response.json();
   })
   .then(data => {
-    // Work with the JSON data here
+    // console.log(data.success);
     document.getElementById('test').innerText = data.success;
   })
   .catch(error => {
-    // Handle any errors that occurred during the fetch
     console.error("Fetch error:", error);
   });
